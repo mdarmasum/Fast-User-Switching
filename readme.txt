@@ -3,7 +3,7 @@ Contributors: kasperta
 Tags: user, switching, switch, users, admin, bar, top, fast, roles, impersonate, authentication, tikweb
 Donate link: http://www.tikweb.dk/donate/
 Requires at least: 4.6
-Tested up to: 4.9.4
+Tested up to: 5.1
 Requires PHP: 5.2
 Stable tag: 1.4.8
 
@@ -40,9 +40,6 @@ Log out and you are back, the plugin remembers your original login, and returns 
 3. Recent impersonate user list
 
 == Changelog ==
-
-= 1.4.8 - 2019-01-02 =
-* Fixed the security issue, now the secrate key will be generated from WP salt function which is not the same key for other websites that use this plugin.
 
 [Changelog](https://plugins.svn.wordpress.org/fast-user-switching/trunk/changelog.txt)
 

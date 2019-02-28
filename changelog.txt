@@ -1,4 +1,7 @@
-== Changelog ==
+== Changelog === 
+
+1.4.8 - 2019-01-02 =
+* Fixed the security issue, now the secrate key will be generated from WP salt function which is not the same key for other websites that use this plugin.
 
 = 1.4.7 - 2018-06-12 =
 * Fixed the CSS issue in the search dropdown that shows transparent text.

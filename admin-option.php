@@ -4,46 +4,46 @@ add_action( 'admin_init', 'tikemp_settings_init' );
 
 
 
-function tikemp_add_admin_menu(  ) { 
+function tikemp_add_admin_menu(  ) {
 
 	add_options_page( 'Fast user switching', 'Fast user switching', 'manage_options', 'fast_user_switching', 'tikemp_options_page' );
 
 }
 
 
-function tikemp_settings_init(  ) { 
+function tikemp_settings_init(  ) {
 
 	register_setting( 'pluginPage', 'fus_settings', 'tikemp_settings_filter' );
 
 	add_settings_section(
-		'tikemp_pluginPage_section', 
-		__( '', 'fast-user-switching' ), 
-		'tikemp_settings_section_callback', 
+		'tikemp_pluginPage_section',
+		__( '', 'fast-user-switching' ),
+		'tikemp_settings_section_callback',
 		'pluginPage'
 	);
 
-	add_settings_field( 
-		'fus_name', 
-		__( 'Show first name and surname', 'fast-user-switching' ), 
-		'tikemp_name_render', 
-		'pluginPage', 
-		'tikemp_pluginPage_section' 
+	add_settings_field(
+		'fus_name',
+		__( 'Show first name and surname', 'fast-user-switching' ),
+		'tikemp_name_render',
+		'pluginPage',
+		'tikemp_pluginPage_section'
 	);
 
-	add_settings_field( 
-		'fus_role', 
-		__( 'Show role (access level)', 'fast-user-switching' ), 
-		'tikemp_role_render', 
-		'pluginPage', 
-		'tikemp_pluginPage_section' 
+	add_settings_field(
+		'fus_role',
+		__( 'Show role (access level)', 'fast-user-switching' ),
+		'tikemp_role_render',
+		'pluginPage',
+		'tikemp_pluginPage_section'
 	);
 
-	add_settings_field( 
-		'fus_username', 
-		__( 'Show user name', 'fast-user-switching' ), 
-		'tikemp_username_render', 
-		'pluginPage', 
-		'tikemp_pluginPage_section' 
+	add_settings_field(
+		'fus_username',
+		__( 'Show user name', 'fast-user-switching' ),
+		'tikemp_username_render',
+		'pluginPage',
+		'tikemp_pluginPage_section'
 	);
 
 	add_settings_field(
@@ -55,7 +55,7 @@ function tikemp_settings_init(  ) {
 	);
 
 	if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ){
-		
+
 		add_settings_field(
 			'fus_woo',
 			__( 'Empty WooCommerce cart item during switching','fast-user-switching' ),
@@ -93,13 +93,13 @@ function tikemp_role_select_repeater(){
 	echo '<table class="form-table" id="role-select">';
 
 	?>
-	
+
 	<tr class="role-selector hidden">
 		<th scope="row"><?= __('Enable User Switching For','fast-user-switching'); ?></th>
 		<td>
 			<select name="fus_settings[fus_roles][]" >
 
-				<?php 
+				<?php
 
 					foreach ($roles as $rkey => $rval) {
 						?>
@@ -118,13 +118,13 @@ function tikemp_role_select_repeater(){
 	<?php
 	foreach ($fus_roles as $key => $value) :
 	?>
-	
+
 		<tr class="role-selector">
 			<th scope="row"><?= __('Enable User Switching For','fast-user-switching'); ?></th>
 			<td>
 				<select name="fus_settings[fus_roles][]" >
 
-				<?php 
+				<?php
 
 					foreach ($roles as $rkey => $rval) {
 						?>
@@ -145,12 +145,12 @@ function tikemp_role_select_repeater(){
 
 	<?php
 	endforeach;
-	
+
 	echo '</table>';
 }
 
 
-function tikemp_name_render(  ) { 
+function tikemp_name_render(  ) {
 
 	$options = get_option( 'fus_settings', []);
 	$fus_name = isset($options['fus_name']) ? $options['fus_name'] : 0;
@@ -162,7 +162,7 @@ function tikemp_name_render(  ) {
 }
 
 
-function tikemp_role_render(  ) { 
+function tikemp_role_render(  ) {
 
 	$options = get_option( 'fus_settings', []);
 	$fus_role = isset($options['fus_role']) ? $options['fus_role'] : 0;
@@ -173,7 +173,7 @@ function tikemp_role_render(  ) {
 }
 
 
-function tikemp_username_render(  ) { 
+function tikemp_username_render(  ) {
 
 	$options = get_option( 'fus_settings', []);
 	$fus_username = isset($options['fus_username']) ? $options['fus_username'] : 0;
@@ -208,12 +208,12 @@ function tikemp_wooorder_render(){
 }
 
 
-function tikemp_settings_section_callback(  ) { 
+function tikemp_settings_section_callback(  ) {
 
 }
 
 
-function tikemp_options_page(  ) { 
+function tikemp_options_page(  ) {
 
 	?>
 	<form action='options.php' method='post' id='tikemp_settings_page'>
@@ -252,7 +252,7 @@ function tikemp_settings_filter($opt){
 		if ( count($user) == 4 ){
 			$last_date = end($user);
 		}
-		
+
 		$new_display_format = tikemp_updateUserInfo($user_id,$opt);
 		$recent_users[$key] = $new_display_format.'&'.$last_date;
 
@@ -268,9 +268,9 @@ function tikemp_updateUserInfo($user_id,$fus_settings){
 	$user = get_userdata( $user_id );
 
 	$roles = tikemp_get_readable_rolename(array_shift($user->roles));
-	
+
 	if ( isset($fus_settings['fus_name']) ){
-		$name_display = $user->first_name.' '.$user->last_name;				
+		$name_display = $user->first_name.' '.$user->last_name;
 	}else {
 		$name_display = ' ';
 	}
